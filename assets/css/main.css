@@ -900,7 +900,24 @@ textarea {
     font-size: 14     px;
   }
 }
+  
 end of Custom CSS for Responsive navbar */
+
+.website-name {
+  font-family: var(--menu-font); /* Use the same font as your menu */
+  font-size: 1rem; /* Adjust font size as needed */
+  color: var(--nav-link-color); /* Use the same color as your menu links */
+  margin-left: 1rem; /* Adjust spacing between logo and text */
+  align-items: center; /* Vertically align the text with the logo */
+  display: flex;
+}
+
+@media all and (max-width: 56.1875em) {
+  .website-name {
+      display: none; /* Hide the text on smaller screens if needed */
+  }
+}
+
 
 @media all and (min-width: 56.25em) {
   .navbar .navbar__toggle {
