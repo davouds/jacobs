@@ -893,6 +893,32 @@ textarea {
   padding: 0;
   width: 3.2rem;
 }
+
+/* Custom CSS for Responsive navbar 
+@media (max-width: 768px) {
+  .navbar-brand span {
+    font-size: 14     px;
+  }
+}
+  
+end of Custom CSS for Responsive navbar */
+
+.website-name {
+  font-family: var(--menu-font); /* Use the same font as your menu */
+  font-size: 1rem; /* Adjust font size as needed */
+  color: var(--nav-link-color); /* Use the same color as your menu links */
+  margin-left: 1rem; /* Adjust spacing between logo and text */
+  align-items: center; /* Vertically align the text with the logo */
+  display: flex;
+}
+
+@media all and (max-width: 56.1875em) {
+  .website-name {
+      display: none; /* Hide the text on smaller screens if needed */
+  }
+}
+
+
 @media all and (min-width: 56.25em) {
   .navbar .navbar__toggle {
     display: none;
@@ -1199,13 +1225,17 @@ padding-right: var(--page-margin);
 }
 
 /* Custom CSS */
-
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* adjust the value to your desired space */
+}
 /* end of Custom CSS */
 
 .hero--noimage::after {
   background: var(--dark);
   content: "";
-  display: block;
+  display: none;
   height: 1px;
   bottom: 0;
   width: calc(100% - var(--page-margin) * 2);
@@ -1216,14 +1246,11 @@ padding-right: var(--page-margin);
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
 }
-.hero__content {
-  padding-bottom: calc(var(--baseline) * 0 + 0vw); /* used to be * 6 + 1.5vw); */
-}
+
 .hero__content h1 > sup  {
   font-size: 1.066666667rem;
   vertical-align: top;
     /* display: none; (from Gemini) */ 
-    display: none;
 }
 .hero__content--centered {
   text-align: center;
