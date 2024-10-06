@@ -140,13 +140,13 @@ h6 {
 
 h1,
 .h1 {
-  font-size: clamp(1.5710900065rem, 1.5710900065rem + 1.424540906 * (100vw - 20rem) / 70, 2.9956309125rem);
+  font-size: clamp(1.3808408252rem, 1.3808408252rem + 0.9332127447 * (100vw - 20rem) / 70, 2.3140535699rem);
   font-family: var(--heading-font);
 }
 
 h2,
 .h2 {
-  font-size: clamp(1.3808408252rem, 1.3808408252rem + 0.9332127447 * (100vw - 20rem) / 70, 2.3140535699rem);
+  font-size: clamp(1.3808408252rem, 1.3808408252rem + 0.9332127447 * (100vw - 20rem) / 70, 2rem);
 }
 
 h3,
@@ -1162,24 +1162,26 @@ textarea {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   max-width: var(--page-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--page-margin);
-  padding-right: var(--page-margin);
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* Custom CSS */
 h1 {
   -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-max-width: var(--entry-width);
-margin-left: auto;
-margin-right: auto;
+          box-sizing: content-box;
+/* width: var(--entry-width); */
+width: fit-content(13em);
+margin-left: 15%;
+margin-right: 15%;
 border: none;
+/* margin-top: 10%; */
 margin-bottom: 0;
 padding-bottom: 0;
-padding-left: var(--page-margin);
-padding-right: var(--page-margin);
+padding-left: 3em;
+padding-right: 0;
 }
 /* end of Custom CSS */
 
@@ -1218,12 +1220,13 @@ padding-right: var(--page-margin);
 }
 .hero__content {
   padding-bottom: calc(var(--baseline) * 0 + 0vw); /* used to be * 6 + 1.5vw); */
+  padding-top: calc(var(--baseline) * 4 + 1vw); /* Added by me */
 }
 .hero__content h1 > sup  {
   font-size: 1.066666667rem;
-  vertical-align: top;
+  vertical-align: 50%;
     /* display: none; (from Gemini) */ 
-    display: none;
+    /* display: none; */
 }
 .hero__content--centered {
   text-align: center;
@@ -2022,13 +2025,13 @@ padding-right: var(--page-margin);
 .footer__social svg:hover {
   fill: var(--gray);
 }
-.footer__copyright {
+/* .footer__copyright {
   font-size: 0.8239746086rem;
   margin-top: var(--baseline);
 }
 .footer__copyright > *:first-child {
   margin: 0;
-}
+} */
 .footer__bttop {
   background: var(--page-bg);
   bottom: calc(var(--baseline) * 5);
