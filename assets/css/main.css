@@ -1172,16 +1172,15 @@ textarea {
 h1 {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-/* width: var(--entry-width); */
-width: fit-content(13em);
-margin-left: 15%;
-margin-right: 15%;
-border: none;
-/* margin-top: 10%; */
-margin-bottom: 0;
-padding-bottom: 0;
-padding-left: 3em;
-padding-right: 0;
+  max-width: var(--entry-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 /* end of Custom CSS */
 
@@ -1219,8 +1218,8 @@ padding-right: 0;
           transform: translate(-50%, 0);
 }
 .hero__content {
-  padding-bottom: calc(var(--baseline) * 0 + 0vw); /* used to be * 6 + 1.5vw); */
-  padding-top: calc(var(--baseline) * 4 + 1vw); /* Added by me */
+  padding-bottom: calc(var(--baseline) + 1.5vw);
+  padding-top: calc(var(--baseline) * 7 + 1vw); /* Added by me */
 }
 .hero__content h1 > sup  {
   font-size: 1.066666667rem;
@@ -1238,6 +1237,7 @@ padding-right: 0;
   margin-top: calc(var(--baseline) * 6);
 }
 .hero__image {
+  margin-top: 2rem;
   margin: 0 var(--page-margin);
 }
 .hero__image-wrapper {
@@ -1247,7 +1247,7 @@ padding-right: 0;
 }
 @media all and (min-width: 56.25em) {
   .hero__image-wrapper {
-    height: var(--hero-height);
+    height: calvar(--hero-height);
   }
 }
 .hero__image-wrapper img {
@@ -1260,7 +1260,7 @@ padding-right: 0;
 }
 @media all and (min-width: 56.25em) {
   .hero__image-wrapper img {
-    height: var(--hero-height);
+    height: calc(var(--hero-height) + 5vw);
   }
 }
 .hero__image > figcaption {
@@ -1391,7 +1391,7 @@ padding-right: 0;
   justify-content: center;
 }
 .content__entry {
-  margin-top: calc(var(--baseline) * 6 + 1.5vw);
+  margin-top: calc(var(--baseline) * 2 + 1.5vw);
 }
 .content__entry > :nth-child(1) {
   margin-top: 0;
