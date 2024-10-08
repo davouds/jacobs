@@ -1219,7 +1219,7 @@ h1 {
 }
 .hero__content {
   padding-bottom: calc(var(--baseline) + 1.5vw);
-  padding-top: calc(var(--baseline) * 7 + 1vw); /* Added by me */
+  padding-top: calc(var(--baseline) * 3 + 1vw); /* Added by me */
 }
 .hero__content h1 > sup  {
   font-size: 1.066666667rem;
