@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://davouds.github.io/sitemap.xml
+Sitemap: https://davouds.github.io/jacobs/sitemap.xml
