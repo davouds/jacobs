@@ -1,3 +1,8 @@
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
 User-agent: *
 Disallow:
-Sitemap: https://davouds.github.io/jacobs/sitemap.xml
