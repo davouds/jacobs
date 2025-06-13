@@ -47,7 +47,64 @@
             item.classList.toggle('cs-active')
         }
         item.addEventListener('click', onClick)
-        }</script><style>.fi{fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}</style><style>.extlink::after {
+        }
+            
+        
+        
+        document.addEventListener('DOMContentLoaded', function () {
+                                    const navigation = document.getElementById('cs-navigation');
+                                
+                                    // Check if the navigation element exists
+                                    if (!navigation) {
+                                        console.warn('Mobile navigation element #cs-navigation not found. "Click outside to close" will not work.');
+                                        return;
+                                    }
+                                
+                                    // Function to close the navigation
+                                    function closeMobileNav() {
+                                        if (navigation.classList.contains('cs-active')) {
+                                            navigation.classList.remove('cs-active');
+                                            document.body.classList.remove('cs-open');
+                                        }
+                                    }
+                                
+                                    // Event listener for clicks on the document
+                                    document.addEventListener('click', function (event) {
+                                        // Check if the navigation menu is active/open
+                                        // This is indicated by the 'cs-active' class on #cs-navigation
+                                        // and 'cs-open' on the body, as seen in your CSS:
+                                        // Navigation OG.css
+                                        if (navigation.classList.contains('cs-active')) {
+                                            // Check if the clicked target is outside the navigation element
+                                            // The navigation.contains(event.target) checks if the click was inside #cs-navigation.
+                                            // If the click is on the toggle button itself, it's considered "inside" the navigation,
+                                            // and its own click handler should manage closing the menu.
+                                            const isClickInsideNav = navigation.contains(event.target);
+                                
+                                            if (!isClickInsideNav) {
+                                                closeMobileNav();
+                                            }
+                                        }
+                                    });
+                                
+                                    // Optional: If your navigation links should also close the menu on click
+                                    // (for single-page applications or anchor links on the same page)
+                                    // you can add this:
+                                    /*
+                                    const navLinks = navigation.querySelectorAll('.cs-li-link');
+                                    navLinks.forEach(link => {
+                                        link.addEventListener('click', function() {
+                                            // Only close if it's a link that doesn't navigate away immediately
+                                            // or if you want to close it regardless.
+                                            // For example, for anchor links:
+                                            if (link.getAttribute('href').startsWith('#')) {
+                                                closeMobileNav();
+                                            }
+                                            // If it's a full page navigation, the menu will close on page load anyway.
+                                        });
+                                    });
+                                    */
+                                });</script><style>.fi{fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}</style><style>.extlink::after {
 				background-color: currentColor;
 				content: "";
 				display: inline-block;
@@ -216,7 +273,7 @@ body {
                     this.classList.add('is-loaded');
                 }, false);
             }
-        }</script><footer id="footer-1390"><div class="cs-container"><div class="cs-top"><ul class="cs-ul"><li class="cs-li"><a href="/" class="cs-link">Home</a></li><li class="cs-li"><a href="/praktijk" class="cs-link">De praktijk</a></li><li class="cs-li"><a href="/behandelingen" class="cs-link">Behandelingens</a></li><li class="cs-li"><a href="/werkwijze" class="cs-link">Werkwijze</a></li><li class="cs-li"><a href="/authors/jacobs/" class="cs-link">Gratis tips</a></li><li class="cs-li"><a href="/praktijkinformatie" class="cs-link">Praktijkinformatie</a></li></ul></div><div class="cs-bottom"><ul class="cs-social"><li class="cs-social-li"><a href="https://www.facebook.com/natuurpraktijkjacobs/" class="cs-social-link" aria-label="facebook" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/facebook-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li><li class="cs-social-li"><a href="https://www.instagram.com/natuurpraktijkjacobs/" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/instagram-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li><li class="cs-social-li"><a href="https://nl.linkedin.com/in/jaap-jacobs-531375100" class="cs-social-link" aria-label="linkedin" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://www.svgrepo.com/show/501613/linkedin.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li></ul><span class="cs-copyright">© Copyright 2024 - <a href="/" class="cs-copyright-link">Natuurpraktijk Jacobs</a></span><div class="cs-flex"><a href="/privacy-verklaring" class="cs-copyright-link">Privacy Verklaring</a></div></div></div></footer><script defer="defer" src="https://davouds.github.io/jacobs/media/plugins/syntaxHighlighter/prism.js"></script><script src="https://davouds.github.io/jacobs/media/plugins/pagePrefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+        }</script><footer id="footer-1390"><div class="cs-container"><div class="cs-top"><ul class="cs-ul"><li class="cs-li"><a href="/jacobs" class="cs-link">Home</a></li><li class="cs-li"><a href="/jacobs/praktijk" class="cs-link">De praktijk</a></li><li class="cs-li"><a href="/jacobs/behandelingen" class="cs-link">Behandelingens</a></li><li class="cs-li"><a href="/jacobs/werkwijze" class="cs-link">Werkwijze</a></li><li class="cs-li"><a href="/jacobs/authors/jacobs/" class="cs-link">Gratis tips</a></li><li class="cs-li"><a href="/jacobs/praktijkinformatie" class="cs-link">Praktijkinformatie</a></li></ul></div><div class="cs-bottom"><ul class="cs-social"><li class="cs-social-li"><a href="https://www.facebook.com/natuurpraktijkjacobs/" class="cs-social-link" aria-label="facebook" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/facebook-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li><li class="cs-social-li"><a href="https://www.instagram.com/natuurpraktijkjacobs/" class="cs-social-link" aria-label="instagram" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons/instagram-ba.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li><li class="cs-social-li"><a href="https://nl.linkedin.com/in/jaap-jacobs-531375100" class="cs-social-link" aria-label="linkedin" target="_blank" rel="noopener"><img class="cs-social-icon cs-default" src="https://www.svgrepo.com/show/501613/linkedin.svg" alt="icon" loading="lazy" decoding="async" width="12" height="12" aria-hidden="true"></a></li></ul><span class="cs-copyright">© Copyright 2024 - <a href="/jacobs" class="cs-copyright-link">Natuurpraktijk Jacobs</a></span><div class="cs-flex"><a href="/jacobs/privacy-verklaring" class="cs-copyright-link">Privacy Verklaring</a></div></div></div></footer><script defer="defer" src="https://davouds.github.io/jacobs/media/plugins/syntaxHighlighter/prism.js"></script><script src="https://davouds.github.io/jacobs/media/plugins/pagePrefetching/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
 					quicklink.listen({
 						prerender: true,
 						el: document.querySelector('body'),
