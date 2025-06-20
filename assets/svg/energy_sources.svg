@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <style>
+    .label { font: 14px sans-serif; text-anchor: middle; }
+  </style>
+  <rect x="20" y="40" width="100" height="40" fill="#fbb" stroke="#000"/>
+  <text x="70" y="65" class="label">Suikers</text>
+
+  <rect x="150" y="40" width="100" height="40" fill="#bfb" stroke="#000"/>
+  <text x="200" y="65" class="label">Vetten</text>
+
+  <rect x="280" y="40" width="100" height="40" fill="#bbf" stroke="#000"/>
+  <text x="330" y="65" class="label">Eiwitten</text>
+</svg>
