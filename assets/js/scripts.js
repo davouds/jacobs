@@ -520,18 +520,9 @@ if (searchButton && searchOverlay && searchInput) {
 
         // open popup
         const linkHref = target.href;
-        const popup = window.open(linkHref, "social", `
-            width=${Config.Width},
-            height=${Config.Height},
-            left=${px},
-            top=${py},
-            location=0,
-            menubar=0,
-            toolbar=0,
-            status=0,
-            scrollbars=1,
-            resizable=1
-        `);
+        const popup = window.open(linkHref, "social", 
+            `width=${Config.Width},height=${Config.Height},left=${px},top=${py},location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1`
+        );
 
         if (popup) {
             popup.focus();
@@ -589,8 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let ratio = false;
-        const hasPercentWidth = w.includes('%');
-        const hasPercentHeight = h.includes('%');
+        const hasPercentWidth = w.endsWith('%');
+        const hasPercentHeight = h.endsWith('%');
 
         if (hasPercentWidth && hasPercentHeight) {
             // percentage mode
