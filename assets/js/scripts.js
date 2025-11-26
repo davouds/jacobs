@@ -7,7 +7,7 @@ let isWaiting = false;
 window.addEventListener('scroll', () => {
     if (!isWaiting) {
         window.requestAnimationFrame(() => {
-            let currentScroll = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+            const currentScroll = window.scrollY || document.documentElement.scrollTop;
 
             if (currentScroll > lastScrollTop) {
                 header.classList.remove(stickyClass);
@@ -22,7 +22,7 @@ window.addEventListener('scroll', () => {
         });
         isWaiting = true;
     }
-}, false);
+}, { passive: true });
 
 // Dropdown menu
 (function (menuConfig) {
@@ -62,23 +62,13 @@ window.addEventListener('scroll', () => {
         relatedContainerForOverlayMenuClass: 'is-visible'
     };
 
-    var config = {};
-
-    Object.keys(defaultConfig).forEach(function (key) {
-        config[key] = defaultConfig[key];
-    });
-
-    if (typeof menuConfig === 'object') {
-        Object.keys(menuConfig).forEach(function (key) {
-            config[key] = menuConfig[key];
-        });
-    }
+    var config = Object.assign({}, defaultConfig, typeof menuConfig === 'object' ? menuConfig : {});
 
     /**
      * Menu initializer
      */
     function init() {
-        if (!document.querySelectorAll(config.wrapperSelector).length) {
+        if (!document.querySelector(config.wrapperSelector)) {
             return;
         }
 
@@ -102,6 +92,7 @@ window.addEventListener('scroll', () => {
      */
     function initSubmenuPositions() {
         var submenuParents = document.querySelectorAll(config.wrapperSelector + ' .' + config.parentItemClass);
+        var menuElement = document.querySelector(config.menuSelector);
 
         for (var i = 0; i < submenuParents.length; i++) {
             var eventTrigger = config.isHoverMenu ? 'mouseenter' : 'click';
@@ -109,11 +100,7 @@ window.addEventListener('scroll', () => {
             submenuParents[i].addEventListener(eventTrigger, function () {
                 var submenu = this.querySelector(config.submenuSelector);
                 var itemPosition = this.getBoundingClientRect().left;
-                var widthMultiplier = 2;
-
-                if (this.parentNode === document.querySelector(config.menuSelector)) {
-                    widthMultiplier = 1;
-                }
+                var widthMultiplier = this.parentNode === menuElement ? 1 : 2;
 
                 if (config.submenuWidth !== 'auto') {
                     var submenuPotentialPosition = itemPosition + (config.submenuWidth * widthMultiplier);
@@ -533,18 +520,9 @@ if (searchButton && searchOverlay && searchInput) {
 
         // open popup
         const linkHref = target.href;
-        const popup = window.open(linkHref, "social", `
-            width=${Config.Width},
-            height=${Config.Height},
-            left=${px},
-            top=${py},
-            location=0,
-            menubar=0,
-            toolbar=0,
-            status=0,
-            scrollbars=1,
-            resizable=1
-        `);
+        const popup = window.open(linkHref, "social", 
+            `width=${Config.Width},height=${Config.Height},left=${px},top=${py},location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1`
+        );
 
         if (popup) {
             popup.focus();
@@ -557,12 +535,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToTopButton = document.getElementById('backToTop');
 
     if (backToTopButton) {
+        let isScrollThrottled = false;
+        
         const backToTopScrollFunction = () => {
-            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-                backToTopButton.classList.add('is-visible');
-            } else {
-                backToTopButton.classList.remove('is-visible');
-            }
+            if (isScrollThrottled) return;
+            
+            isScrollThrottled = true;
+            window.requestAnimationFrame(() => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                backToTopButton.classList.toggle('is-visible', scrollTop > 400);
+                isScrollThrottled = false;
+            });
         };
 
         const backToTopFunction = () => {
@@ -572,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        window.addEventListener('scroll', backToTopScrollFunction);
+        window.addEventListener('scroll', backToTopScrollFunction, { passive: true });
         backToTopButton.addEventListener('click', backToTopFunction);
     }
 });
@@ -580,40 +563,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Responsive embeds script
 (function () {
-    let wrappers = document.querySelectorAll('.post__video, .post__iframe');
+    const wrappers = document.querySelectorAll('.post__video, .post__iframe');
 
-    for (let i = 0; i < wrappers.length; i++) {
-        let embed = wrappers[i].querySelector('iframe, embed, video, object');
+    wrappers.forEach(wrapper => {
+        const embed = wrapper.querySelector('iframe, embed, video, object');
 
-        if (!embed) {
-            continue;
+        if (!embed || embed.getAttribute('data-responsive') === 'false') {
+            return;
         }
 
-        if (embed.getAttribute('data-responsive') === 'false') {
-            continue;
-        }
-
-        let w = embed.getAttribute('width');
-        let h = embed.getAttribute('height');
-        let ratio = false;
+        const w = embed.getAttribute('width');
+        const h = embed.getAttribute('height');
 
         if (!w || !h) {
-            continue;
+            return;
         }
 
-        if (w.indexOf('%') > -1 && h.indexOf('%') > -1) { // percentage mode
-            w = parseFloat(w.replace('%', ''));
-            h = parseFloat(h.replace('%', ''));
-            ratio = h / w;
-        } else if (w.indexOf('%') === -1 && h.indexOf('%') === -1) { // pixels mode
-            w = parseInt(w, 10);
-            h = parseInt(h, 10);
-            ratio = h / w;
+        let ratio = false;
+        const hasPercentWidth = w.endsWith('%');
+        const hasPercentHeight = h.endsWith('%');
+
+        if (hasPercentWidth && hasPercentHeight) {
+            // percentage mode
+            ratio = parseFloat(h) / parseFloat(w);
+        } else if (!hasPercentWidth && !hasPercentHeight) {
+            // pixels mode
+            ratio = parseInt(h, 10) / parseInt(w, 10);
         }
 
         if (ratio !== false) {
-            let ratioValue = (ratio * 100) + '%';
-            wrappers[i].setAttribute('style', '--embed-aspect-ratio:' + ratioValue);
+            wrapper.style.setProperty('--embed-aspect-ratio', (ratio * 100) + '%');
         }
-    }
+    });
 })();
